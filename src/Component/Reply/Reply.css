@@ -1,0 +1,32 @@
+.container{
+    width: 100%;
+    max-width: 680px;
+
+    background-color: var(--css-white);
+
+    display: flex;
+    
+    margin: 0 auto; /* Center the container */
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+.container img{
+    width: 2rem;
+    height: 2rem;
+}
+.container input{
+    flex: 1;
+    margin: 0 0.75rem; /* Add some space between input and button */
+    border: 1px var(--css-dark-blue) solid;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+.container button{
+    background-color: var(--css-moderate-blue);
+    color: var(--css-white);
+    font-weight: 700;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+}
