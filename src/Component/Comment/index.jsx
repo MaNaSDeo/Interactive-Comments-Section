@@ -2,15 +2,13 @@ import './Comment.css';
 import ReplyIcon from '../../images/icon-reply.svg'
 
 function index({data}) {
-  // console.log(data[0]);
-  const userData = data[0];
   return (
     <div className='comment-card'>
 
       {/* For Upvotes & Downvotes */}
       <div className='upvotes'>
         <button>+</button>
-        <p>{userData.score}</p>
+        <p>{data.score}</p>
         <button>-</button>
       </div>
 
@@ -23,10 +21,10 @@ function index({data}) {
           {/* Avtar, User name & When the comment was made */}
           <div className='user-details'>
             <div className='user-img'>
-              <img src={userData.user.image.png} alt={userData.user.username} />
+              <img src={data.user.image.png} alt={data.user.username} />
             </div>
-            <p className='user-name'>{userData.user.username}</p>
-            <p className='created-at'>{userData.createdAt}</p>
+            <p className='user-name'>{data.user.username}</p>
+            <p className='created-at'>{data.createdAt}</p>
             {/* <ReplyIcon /> */}
           </div>
 
@@ -38,7 +36,7 @@ function index({data}) {
         </div>
 
         {/* Comment */}
-        <div className='comments'>{userData.content}</div>
+        <div className='comments'>{data.content}</div>
       </div>
     </div>
   )

@@ -4,7 +4,7 @@
     align-items: center;
     background-color: var(--css-white);
     border-radius: .5rem;
-    margin: 0.5rem;
+    margin: 0.5rem auto;
 }
 .upvotes{
     background-color: var(--css-light-gray);
@@ -12,6 +12,9 @@
     padding: 0.25rem;
     border-radius: 0.5rem;
     margin: 1rem 0.5rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .card{
     margin: 1rem 1rem 1rem 0.5rem;
