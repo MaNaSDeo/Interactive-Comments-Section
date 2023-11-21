@@ -1,5 +1,6 @@
 .comment-card{
     max-width: 680px;
+    width: 100%;
     display: flex;
     align-items: center;
     background-color: var(--css-white);
@@ -44,16 +45,19 @@
 .created-at{
     font-weight: 500;
 }
-.reply{
+.btn-icon{
     color: var(--css-dark-blue);
     font-weight: 700;
     display: flex;
     align-items: center;
 }
-.reply img{
+.btn-icon img{
     width: 0.8rem;
     height: 0.8rem;
     margin-right: 0.25rem;
+}
+.user-btn{
+    display: flex;
 }
 button{
     border: none;
@@ -62,4 +66,14 @@ button{
 }
 .comments{
     margin-top: 0.5rem;
+}
+.replies-container{
+    margin: 0 auto;
+    /* align-content: left; */
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+.reply-container{
+    width: 80%;
 }

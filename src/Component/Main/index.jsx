@@ -7,19 +7,18 @@ import fakeData from '../../data/data.json';
 function index() {
 
     const [data, setData] = useState(fakeData);
-    console.log(data.comments[1]);
+    console.log(data);
 
     return (
         <div className='main'>
-            <Comment data={data.comments[0]}/>
-            {/* {data.comments[1].map(element => {
+            
+            {data.comments.map(comment => {
+                console.log(comment)
                 return(
-            <Comment 
-                key={element.id} 
-                data={element} 
-            />)})} */}
-            <Comment data={data.comments[1]} />
-            <Reply data={data.currentUser}/>
+                    <Comment key={comment.id} data={comment} currentUserData={data.currentUser} setData={setData}/>
+                )
+            })}
+            <Reply data={data.currentUser} setData={setData}/>
         </div>
     )
 }
