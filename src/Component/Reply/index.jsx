@@ -20,39 +20,42 @@ function index({data, setData, replyToCommentId}) {
     }
   }
 
-const handleChange = (e) => {
-  e.preventDefault();
-  const d = new Date();
-  let time = d.getTime();
-  let updatedComment = {
-    ...blankComment,
-    id: time,
-    content: reply,
-  };
-  // setData(prevData => ({
-  //   ...prevData,
-  //   comments: [...prevData.comments, updatedComment],
-  // }));
-  setData(prevData => {
-    const updatedComments = prevData.comments.map(comment => {
-      if (comment.id === replyToCommentId) { // replyToCommentId is the id of the comment you're replying to
-        return {
-          ...comment,
-          replies: [...comment.replies, updatedComment],
-        };
-      } else {
-        return comment;
-      }
-    });
-    return {
-      ...prevData,
-      comments: updatedComments,
+  const handleChange = (e) => {
+    e.preventDefault();
+    const d = new Date();
+    let time = d.getTime();
+    let updatedComment = {
+      ...blankComment,
+      id: time,
+      content: reply,
     };
-  });
-  setReply('');
-};
-
-
+    // setData(prevData => ({
+    //   ...prevData,
+    //   comments: [...prevData.comments, updatedComment],
+    // }));
+    setData(prevData => {
+      let updatedComments;
+      if(replyToCommentId){
+        updatedComments = prevData.comments.map(comment => {
+          if (comment.id === replyToCommentId) { // replyToCommentId is the id of the comment you're replying to
+            return {
+              ...comment,
+              replies: [...comment.replies, updatedComment],
+            };
+          } else {
+            return comment;
+          }
+        });
+      } else{
+        updatedComments = [...prevData.comments, updatedComment];
+      }
+      return {
+        ...prevData,
+        comments: updatedComments,
+      };
+    });
+    setReply('');
+  };
 
   return (
     <div className='container'>
