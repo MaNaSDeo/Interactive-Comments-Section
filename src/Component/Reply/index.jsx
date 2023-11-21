@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './Reply.css'
 
-function index({data, setData}) {
+function index({data, setData, replyToCommentId}) {
   
   const [reply, setReply] = useState('');
   
@@ -29,10 +29,26 @@ const handleChange = (e) => {
     id: time,
     content: reply,
   };
-  setData(prevData => ({
-    ...prevData,
-    comments: [...prevData.comments, updatedComment],
-  }));
+  // setData(prevData => ({
+  //   ...prevData,
+  //   comments: [...prevData.comments, updatedComment],
+  // }));
+  setData(prevData => {
+    const updatedComments = prevData.comments.map(comment => {
+      if (comment.id === replyToCommentId) { // replyToCommentId is the id of the comment you're replying to
+        return {
+          ...comment,
+          replies: [...comment.replies, updatedComment],
+        };
+      } else {
+        return comment;
+      }
+    });
+    return {
+      ...prevData,
+      comments: updatedComments,
+    };
+  });
   setReply('');
 };
 

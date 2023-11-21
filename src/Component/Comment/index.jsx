@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 function Comment({data, currentUserData, setData}) {
   // console.log(data)
-  const [relpyNeeded, setReplyNeeded] = useState(false);
+  const [replyNeeded , setReplyNeeded] = useState(false);
   return (
     <div>
       <div className='comment-card'>
@@ -65,7 +65,9 @@ function Comment({data, currentUserData, setData}) {
           <div className='comments'>{data.content}</div>
         </div>
       </div>
-      {relpyNeeded ? <Reply data={currentUserData} setData={setData} /> : <></>}
+      {/* {replyNeeded  ? <Reply data={currentUserData} setData={setData} /> : <></>} */}
+      {replyNeeded  && <Reply data={currentUserData} setData={setData} replyToCommentId={data.id} />}
+
       <div className='replies-container'>
         {data.replies && data.replies.map(reply =>{
           return(
