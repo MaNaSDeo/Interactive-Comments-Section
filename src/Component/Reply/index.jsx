@@ -29,21 +29,36 @@ function index({data, setData, replyToCommentId}) {
       id: time,
       content: reply,
     };
-    // setData(prevData => ({
-    //   ...prevData,
-    //   comments: [...prevData.comments, updatedComment],
-    // }));
+    
     setData(prevData => {
       let updatedComments;
       if(replyToCommentId){
         updatedComments = prevData.comments.map(comment => {
-          if (comment.id === replyToCommentId) { // replyToCommentId is the id of the comment you're replying to
+          if (comment.id === replyToCommentId) {
+            if(!comment.replies){
+              comment.replies = [];
+            }
             return {
               ...comment,
               replies: [...comment.replies, updatedComment],
             };
           } else {
-            return comment;
+            // Check the replies of the comment
+            if (comment.replies) {
+              const updatedReplies = comment.replies.map(reply => {
+                if (reply.id === replyToCommentId) {
+                  return {
+                    ...reply,
+                    replies: reply.replies ? [...reply.replies, updatedComment] : [updatedComment],
+                  };
+                } else {
+                  return reply;
+                }
+              });
+              return {...comment, replies: updatedReplies};
+            } else {
+              return comment;
+            }
           }
         });
       } else{
@@ -54,6 +69,8 @@ function index({data, setData, replyToCommentId}) {
         comments: updatedComments,
       };
     });
+    
+    
     setReply('');
   };
 

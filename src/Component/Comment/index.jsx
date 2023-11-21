@@ -7,7 +7,6 @@ import Reply from '../Reply';
 import { useState } from 'react';
 
 function Comment({data, currentUserData, setData}) {
-  // console.log(data)
   const [replyNeeded , setReplyNeeded] = useState(false);
   return (
     <div>
@@ -65,14 +64,13 @@ function Comment({data, currentUserData, setData}) {
           <div className='comments'>{data.content}</div>
         </div>
       </div>
-      {/* {replyNeeded  ? <Reply data={currentUserData} setData={setData} /> : <></>} */}
       {replyNeeded  && <Reply data={currentUserData} setData={setData} replyToCommentId={data.id} />}
 
       <div className='replies-container'>
         {data.replies && data.replies.map(reply =>{
           return(
             <div key={reply.id} className='reply-container'>
-              <Comment data={reply} />
+              <Comment data={reply} currentUserData={currentUserData} setData={setData}/>
             </div>
           )
         })}
