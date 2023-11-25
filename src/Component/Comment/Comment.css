@@ -1,11 +1,17 @@
-.comment-card{
+.comments-container{
     max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+.comment-card{
     width: 100%;
     display: flex;
     align-items: center;
     background-color: var(--css-white);
     border-radius: .5rem;
-    margin: 0.5rem auto;
+    margin: 0.5rem 0;
 }
 .upvotes{
     background-color: var(--css-light-gray);
@@ -19,6 +25,9 @@
 }
 .card{
     margin: 1rem 1rem 1rem 0.5rem;
+    /* display: flex;
+    flex-direction: column;
+    align-items: end; */
 }
 .details{
     display: flex;
@@ -64,16 +73,32 @@ button{
     background: none;
     cursor: pointer;
 }
+.update-btn{
+    display: flex;
+    justify-content: end;
+}
+.update-btn button{
+    background-color: var(--css-moderate-blue);
+    color: var(--css-white);
+    font-weight: 700;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    height: 2.4rem;
+    width: 6rem;
+}
 .comments{
     margin-top: 0.5rem;
 }
-.replies-container{
-    margin: 0 auto;
-    /* align-content: left; */
-    display: flex;
-    flex-direction: column;
-    align-items: end;
+.comments span{
+    color: var(--css-moderate-blue);
+    font-weight: 700;
 }
-.reply-container{
-    width: 80%;
+
+.replies-container{
+    max-width: 96%; /* 80% of the parent's width */
+  display: flex;
+  flex-direction: column;
+  align-items: end;
 }

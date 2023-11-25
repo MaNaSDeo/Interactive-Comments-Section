@@ -8,17 +8,31 @@ import { useState } from 'react';
 
 function Comment({data, currentUserData, setData}) {
   const [replyNeeded , setReplyNeeded] = useState(false);
+  const [editComment, setEditComment] = useState('');
+  const [isEditable, setIsEditable] = useState(false);
+  const [upvotes, setUpvotes] = useState(data.score);
+
   return (
-    <div>
+    <div className='comments-container'>
       <div className='comment-card'>
 
         {/* For Upvotes & Downvotes */}
         <div className='upvotes'>
-          <button>
+          <button
+            onClick={() => {
+              const currentSore = upvotes - data.score;
+              console.log(currentSore);
+              if(currentSore < 1)
+                setUpvotes(upvotes + 1)}}>
             +
           </button>
-          <p>{data.score}</p>
-          <button>
+          <p>{upvotes}</p>
+          <button
+            onClick={() => {
+              const currentSore = data.score - upvotes;
+              console.log(currentSore);
+              if(currentSore < 1)
+                setUpvotes(upvotes - 1)}}>
             -
           </button>
         </div>
@@ -45,7 +59,9 @@ function Comment({data, currentUserData, setData}) {
                   <img src={DeleteIcon} alt="DeleteIcon" />
                   <p>Delete</p>
                 </button>
-                <button className='btn-icon'>
+                <button 
+                  className='btn-icon' 
+                  onClick={() => setIsEditable(!isEditable)} >
                 <img src={EditIcon} alt="Edit Icon" />
                   <p>Edit</p>
                 </button>
@@ -53,7 +69,10 @@ function Comment({data, currentUserData, setData}) {
             </div> :
             <button 
               className='btn-icon'
-              onClick={() => setReplyNeeded(true)}  
+              onClick={() => {
+                setReplyNeeded(!replyNeeded)
+                setEditComment(data.content)
+              }}
             >
               <img src={ReplyIcon} alt="Reply Icon" />
               <p>Reply</p>
@@ -61,10 +80,20 @@ function Comment({data, currentUserData, setData}) {
           </div>
 
           {/* Comment */}
-          <div className='comments'>{data.content}</div>
+          <div className='comments'>
+            {(data.user.username==='juliusomo' && isEditable)? <textarea 
+              placeholder='Enter' 
+              value={editComment}
+              onChange={(e) => setEditComment(e.target.value)} 
+              /> : <p>{data.replyingTo && <span>@{data.replyingTo} </span> }{data.content}</p>}
+            {/* <p>{data.content}</p> */}
+          </div>
+          {isEditable && <div className="update-btn">
+            <button>UPDATE</button>
+          </div>}
         </div>
       </div>
-      {replyNeeded  && <Reply data={currentUserData} setData={setData} replyToCommentId={data.id} />}
+      {replyNeeded  && <Reply data={currentUserData} setData={setData} replyToCommentId={data.id} replyingToUserName={data.user.username} />}
 
       <div className='replies-container'>
         {data.replies && data.replies.map(reply =>{
