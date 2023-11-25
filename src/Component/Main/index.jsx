@@ -8,9 +8,13 @@ function index() {
 
     const [data, setData] = useState(JSON.parse(window.localStorage.getItem('jsonObject')) || fakeData);
 
+    // const [inputText, setInputText] = useState(data.comments[0].content);
+    // console.log(data.comments[0].content)
+
     useEffect(() => {
         window.localStorage.setItem('jsonObject', JSON.stringify(data));
     }, [data])
+    // console.log(data.comments)
 
     return (
         <div className='main'>
@@ -21,6 +25,11 @@ function index() {
                 )
             })}
             <Reply data={data.currentUser} setData={setData}/>
+            {/* <textarea 
+                style={{margin: '0 auto'}} 
+                placeholder='Input any Statement' 
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)} /> */}
         </div>
     )
 }

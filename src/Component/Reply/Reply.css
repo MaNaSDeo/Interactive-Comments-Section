@@ -30,7 +30,7 @@
     max-height: 12rem; /* Maximum height */
     overflow: auto; /* Adds a scrollbar if the content exceeds the max-height */
     width: 100%; /* Full width */
-    resize: vertical; /* Disables manual resizing */
+    resize: vertical;
     box-sizing: border-box;
     margin: 0 0.75rem; /* Add some space between input and button */
     padding: 1rem;

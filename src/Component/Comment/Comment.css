@@ -25,6 +25,8 @@
 }
 .card{
     margin: 1rem 1rem 1rem 0.5rem;
+    width: 100%;
+    overflow: hidden;
     /* display: flex;
     flex-direction: column;
     align-items: end; */
@@ -90,15 +92,27 @@ button{
 }
 .comments{
     margin-top: 0.5rem;
+    /* width: 100%; */
 }
 .comments span{
     color: var(--css-moderate-blue);
     font-weight: 700;
 }
+.comment-textarea{
+    width: 100%;
+    min-height: 5rem;
+    overflow: auto;
+    resize: vertical;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    border: 1px var(--css-dark-blue) solid;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
 
 .replies-container{
-    max-width: 96%; /* 80% of the parent's width */
-  display: flex;
-  flex-direction: column;
-  align-items: end;
+    max-width: 96%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
 }

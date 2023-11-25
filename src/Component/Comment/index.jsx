@@ -7,10 +7,38 @@ import Reply from '../Reply';
 import { useState } from 'react';
 
 function Comment({data, currentUserData, setData}) {
+
   const [replyNeeded , setReplyNeeded] = useState(false);
-  const [editComment, setEditComment] = useState('');
+  const [editComment, setEditComment] = useState(data.content);
   const [isEditable, setIsEditable] = useState(false);
   const [upvotes, setUpvotes] = useState(data.score);
+
+  // console.log(editComment)
+  const handleUpdate = () => {
+    setData(prevData => {
+      if(prevData.comments){
+        const updatedComment = prevData.comments.map(comment => {
+          if(comment.id === data.id){
+            return{...comment, content: editComment};
+          } else { 
+            // return comment
+            if(comment.replies){
+              const updateReplies = comment.replies.map(reply =>  {
+                if(reply.id === data.id){
+                  return {...reply, content: editComment}
+                } else { return reply}
+              });
+              return {...comment, replies: updateReplies}
+            } else{ return comment}
+          }
+        });
+        return {...prevData, comments: updatedComment};
+      } else{
+        return prevData;
+      }
+    });
+    setIsEditable(!isEditable)
+  }
 
   return (
     <div className='comments-container'>
@@ -21,7 +49,6 @@ function Comment({data, currentUserData, setData}) {
           <button
             onClick={() => {
               const currentSore = upvotes - data.score;
-              console.log(currentSore);
               if(currentSore < 1)
                 setUpvotes(upvotes + 1)}}>
             +
@@ -30,7 +57,6 @@ function Comment({data, currentUserData, setData}) {
           <button
             onClick={() => {
               const currentSore = data.score - upvotes;
-              console.log(currentSore);
               if(currentSore < 1)
                 setUpvotes(upvotes - 1)}}>
             -
@@ -82,6 +108,7 @@ function Comment({data, currentUserData, setData}) {
           {/* Comment */}
           <div className='comments'>
             {(data.user.username==='juliusomo' && isEditable)? <textarea 
+              className="comment-textarea"
               placeholder='Enter' 
               value={editComment}
               onChange={(e) => setEditComment(e.target.value)} 
@@ -89,7 +116,9 @@ function Comment({data, currentUserData, setData}) {
             {/* <p>{data.content}</p> */}
           </div>
           {isEditable && <div className="update-btn">
-            <button>UPDATE</button>
+            <button 
+              onClick={handleUpdate}
+              >UPDATE</button>
           </div>}
         </div>
       </div>
